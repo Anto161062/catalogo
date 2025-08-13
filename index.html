@@ -6,35 +6,18 @@
   <title>Catalogo MySenza</title>
   <meta http-equiv="Cache-Control" content="no-store" />
   <style>
-    body {
-      margin: 0;
-      background: #000;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      overflow: hidden;
-      color: white;
-      font-family: Arial, sans-serif;
+    :root{color-scheme:dark light}
+    body{
+      margin:0;background:#000;color:#fff;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      height:100vh;overflow:hidden;font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif
     }
-    img {
-      max-height: 80vh;
-      max-width: 90vw;
-      object-fit: contain;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.6);
-      animation: fade 1s ease-in-out;
+    img{
+      max-height:80vh;max-width:90vw;object-fit:contain;border-radius:12px;
+      box-shadow:0 0 20px rgba(0,0,0,.6);animation:fade .8s ease-in-out
     }
-    h1 {
-      font-size: 18px;
-      margin-top: 15px;
-      text-align: center;
-    }
-    @keyframes fade {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
+    h1{font-size:18px;margin:14px 0 0;text-align:center}
+    @keyframes fade{from{opacity:0}to{opacity:1}}
   </style>
 </head>
 <body>
@@ -42,29 +25,34 @@
   <h1>Caricamento Catalogo MySenza…</h1>
 
   <script>
+    // === CONFIG ===
+    const PDF_PATH = "catalogo.pdf"; // nome esatto del tuo file
     const images = [
       "sapientia.png",
-      "vigna rossa.png",
+      "vigna%20rossa.png",
       "citri.png",
-      "Vaniglia Nera.png",
+      "Vaniglia%20Nera.png",
       "lavanda_menta.png",
       "oltremare.png",
       "silenzio.png",
-      "vaniglia lime.png"
+      "vaniglia%20lime.png"
     ];
-    let index = 0;
-    const imgElement = document.getElementById("slideshow");
 
-    // Cambia immagine ogni 1.2 secondi
-    const interval = setInterval(() => {
-      index = (index + 1) % images.length;
-      imgElement.src = images[index];
+    // Preload immagini per scorrimento fluido
+    images.forEach(src => { const i = new Image(); i.src = src; });
+
+    // Slideshow
+    let i = 0;
+    const el = document.getElementById("slideshow");
+    setInterval(() => {
+      i = (i + 1) % images.length;
+      el.src = images[i];
     }, 1200);
 
-    // Dopo 10 secondi reindirizza al PDF
+    // Redirect al PDF dopo 10s (con cache-bust)
     setTimeout(() => {
-      clearInterval(interval);
-      window.location.href = "Catalogo.pdf";
+      const url = PDF_PATH + (PDF_PATH.includes("?") ? "&" : "?") + "v=" + Date.now();
+      location.replace(url);
     }, 10000);
   </script>
 </body>
