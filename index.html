@@ -1,11 +1,47 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catalogo MySenza</title>
-    <meta http-equiv="refresh" content="0; url=Catalogo.pdf">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catalogo MySenza</title>
+  <meta http-equiv="Cache-Control" content="no-store" />
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0b0b0b;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    img {
+      max-width: 200px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+    }
+    h1 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+    p {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+  </style>
 </head>
 <body>
+  <!-- Cambia il percorso/immagine come vuoi -->
+  <img src="copertina.jpg" alt="Catalogo MySenza">
+  <h1>Caricamento Catalogo MySenza…</h1>
+  <p>Il PDF si aprirà tra pochi secondi</p>
+
+  <script>
+    setTimeout(function(){
+      window.location.href = "Catalogo.pdf";
+    }, 1200); // tempo in millisecondi (1,2 secondi)
+  </script>
 </body>
 </html>
