@@ -8,40 +8,64 @@
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0b0b0b;
-      color: #fff;
+      background: #000;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      min-height: 100vh;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      color: white;
+      font-family: Arial, sans-serif;
     }
     img {
-      max-width: 200px;
-      margin-bottom: 20px;
+      max-height: 80vh;
+      max-width: 90vw;
+      object-fit: contain;
       border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+      animation: fade 1s ease-in-out;
     }
     h1 {
       font-size: 18px;
-      margin-bottom: 8px;
+      margin-top: 15px;
+      text-align: center;
     }
-    p {
-      font-size: 14px;
-      opacity: 0.8;
+    @keyframes fade {
+      from {opacity: 0;}
+      to {opacity: 1;}
     }
   </style>
 </head>
 <body>
-  <!-- Cambia il percorso/immagine come vuoi -->
-  <img src="copertina.jpg" alt="Catalogo MySenza">
+  <img id="slideshow" src="sapientia.png" alt="MySenza">
   <h1>Caricamento Catalogo MySenza…</h1>
-  <p>Il PDF si aprirà tra pochi secondi</p>
 
   <script>
-    setTimeout(function(){
+    const images = [
+      "sapientia.png",
+      "vigna rossa.png",
+      "citri.png",
+      "Vaniglia Nera.png",
+      "lavanda_menta.png",
+      "oltremare.png",
+      "silenzio.png",
+      "vaniglia lime.png"
+    ];
+    let index = 0;
+    const imgElement = document.getElementById("slideshow");
+
+    // Cambia immagine ogni 1.2 secondi
+    const interval = setInterval(() => {
+      index = (index + 1) % images.length;
+      imgElement.src = images[index];
+    }, 1200);
+
+    // Dopo 10 secondi reindirizza al PDF
+    setTimeout(() => {
+      clearInterval(interval);
       window.location.href = "Catalogo.pdf";
-    }, 1200); // tempo in millisecondi (1,2 secondi)
+    }, 10000);
   </script>
 </body>
 </html>
